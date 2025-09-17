@@ -11,6 +11,7 @@ document.addEventListener('DOMContentLoaded', () => {
     //const PRODUCT_API_BASE_URL = 'http://product-service-w04e2:8000';
     // Order Service is named 'order-service-w04e2' and exposes port 8001 internally.
     //const ORDER_API_BASE_URL = 'http://order-service-w04e2:8001';
+    // change to check if ci/cd are working as expected.
 
     // DOM Elements
     const messageBox = document.getElementById('message-box');
