@@ -125,8 +125,9 @@ jobs:
         creds: ${{ secrets.AZURE_CREDENTIALS }} # Needs to be set as a GitHub Secret (Service Principal JSON)
 
     # Login to Azure Container Registry (ACR)
-    - name: Login to Azure Container Registry
-      run: az acr login --name ${{ env.ACR_LOGIN_SERVER }}
+    - name: Docker login with username/password
+      run: echo ${{ secrets.ACR_PASSWORD }} | docker login ${{ secrets.AZURE_CONTAINER_REGISTRY }} -u ${{ secrets.ACR_USERNAME }} --password-stdin
+
 
     # Build and Push Docker image for Product Service
     - name: Build and Push Product Service Image
