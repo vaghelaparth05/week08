@@ -18,7 +18,7 @@ spec:
       - name: acr-auth
       containers:
       - name: product-service-container
-        image: sit722week08acr.azurecr.io/product_service:latest  # <-- fixed
+        image: sit722week09acr.azurecr.io/product_service:latest  # <-- fixed
         imagePullPolicy: Always
         ports:
         - containerPort: 8000
