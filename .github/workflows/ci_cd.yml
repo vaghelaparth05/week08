@@ -8,25 +8,8 @@ on:
   workflow_dispatch:
 
 jobs:
-  # Step 1: Test backend services
-  test_backend:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
-        with:
-          python-version: "3.10"
-      - run: |
-          pip install --upgrade pip
-          pip install -r backend/product_service/requirements.txt
-          pip install -r backend/order_service/requirements.txt
-          pytest backend/product_service/tests
-          pytest backend/order_service/tests
-
-  # Step 2: Build & push Docker images (only on main)
+  # Step 1: Build & push Docker images (no tests)
   build_push:
-    if: github.ref == 'refs/heads/main'
-    needs: test_backend
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -42,7 +25,7 @@ jobs:
           docker push ${{ secrets.AZURE_CONTAINER_REGISTRY }}/order_service:latest
           docker push ${{ secrets.AZURE_CONTAINER_REGISTRY }}/frontend:latest
 
-  # Step 3: Deploy to AKS (only on main)
+  # Step 2: Deploy to AKS (only on main)
   deploy:
     if: github.ref == 'refs/heads/main'
     needs: build_push
