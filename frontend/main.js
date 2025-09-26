@@ -97,6 +97,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // cart operations, orders, etc. stays the same)
 
     // Initial data fetch on page load
+    // checking auto build for PRs
     fetchProducts();
     fetchOrders();
 });
